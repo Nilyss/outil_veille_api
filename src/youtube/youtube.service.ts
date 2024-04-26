@@ -37,7 +37,7 @@ export class YoutubeService {
       part: ['snippet'],
       channelId: channelId,
       order: 'date',
-      maxResults: 10,
+      maxResults: 20,
     })
 
     return res.data
