@@ -16,4 +16,9 @@ export class YoutubeController {
   findAll(): Promise<Youtube[]> {
     return this.youtubeService.findAll()
   }
+
+  @Get()
+  getLatestVideos() {
+    return this.youtubeService.getLatestVideos('UCbrKH7URH7BqX63bvYTXhQw')
+  }
 }
