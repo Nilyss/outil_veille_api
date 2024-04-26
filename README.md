@@ -15,6 +15,7 @@ L'API fournit les endpoints suivants :
 - **Twitter** : `http://localhost:3000/twitter`
 - **Sites Web** : `http://localhost:3000/websites`
 - **YouTube** : `http://localhost:3000/youtube`
+- **YouTubeById** : `http://localhost:3000/youtube/latest?channelId=`
 
 ## Installation et démarrage
 
