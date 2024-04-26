@@ -38,6 +38,10 @@ Installez les dépendances :
 ```
 yarn install
 ```
+ou
+```
+npm install
+```
 
 ### Démarrage de l'API
 
