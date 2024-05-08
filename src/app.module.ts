@@ -7,6 +7,7 @@ import { RssModule } from './rss/rss.module'
 import { TwitterModule } from './twitter/twitter.module'
 import { WebsiteModule } from './websites/website.module'
 import { YoutubeModule } from './youtube/youtube.module'
+import { KeycloakModule } from './keycloak/keycloak.module'
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { YoutubeModule } from './youtube/youtube.module'
     TwitterModule,
     WebsiteModule,
     YoutubeModule,
+    KeycloakModule,
   ],
 })
 export class AppModule {}
