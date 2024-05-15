@@ -1,10 +1,12 @@
-import { Controller, Get, Post, Body, Query } from '@nestjs/common'
+import { Controller, Get, Post, Body, Query, UseGuards } from '@nestjs/common'
 import { CreateYoutubeDto } from './dto/create-youtube.dto'
 import { YoutubeService } from './youtube.service'
 import { Youtube } from './youtube.model'
 import { youtube_v3 } from 'googleapis'
+import { AuthGuard, ResourceGuard, RoleGuard } from 'nest-keycloak-connect'
 
 @Controller('youtube')
+@UseGuards(AuthGuard, ResourceGuard, RoleGuard)
 export class YoutubeController {
   constructor(private readonly youtubeService: YoutubeService) {}
 

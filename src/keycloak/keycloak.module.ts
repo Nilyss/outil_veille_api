@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common'
-import { ConfigService } from '@nestjs/config'
+import { ConfigModule, ConfigService } from '@nestjs/config'
 import {
   KeycloakConnectModule,
   ResourceGuard,
@@ -12,8 +12,9 @@ const configService: ConfigService = new ConfigService()
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     KeycloakConnectModule.register({
-      authServerUrl: configService.get('KEYCLOAK_URL'),
+      authServerUrl: configService.get('KEYCLOAK_AUTHORIZATION_SERVER_URL'),
       realm: configService.get('KEYCLOAK_REALM'),
       clientId: configService.get('KEYCLOAK_CLIENT_ID'),
       secret: configService.get('KEYCLOAK_SECRET'),

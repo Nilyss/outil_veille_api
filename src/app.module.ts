@@ -7,6 +7,7 @@ import { RssModule } from './rss/rss.module'
 import { TwitterModule } from './twitter/twitter.module'
 import { WebsiteModule } from './websites/website.module'
 import { YoutubeModule } from './youtube/youtube.module'
+import { AuthModule } from './auth/auth.module'
 import { KeycloakModule } from './keycloak/keycloak.module'
 
 @Module({
@@ -19,6 +20,7 @@ import { KeycloakModule } from './keycloak/keycloak.module'
     TwitterModule,
     WebsiteModule,
     YoutubeModule,
+    AuthModule,
     KeycloakModule,
   ],
 })
