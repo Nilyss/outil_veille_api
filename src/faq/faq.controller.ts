@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body } from '@nestjs/common'
 import { CreateFaqDto } from './dto/create-faq.dto'
 import { FaqService } from './faq.service'
 import { Faq } from './faq.model'
+import { Roles } from 'nest-keycloak-connect'
 
 @Controller('Faq')
 export class FaqController {
@@ -13,6 +14,7 @@ export class FaqController {
   }
 
   @Get()
+  @Roles({ roles: ['realm:user', 'realm:admin'] })
   async findAll(): Promise<Faq[]> {
     return this.faqService.findAll()
   }
