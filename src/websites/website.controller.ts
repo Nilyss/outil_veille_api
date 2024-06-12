@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body } from '@nestjs/common'
 import { CreateWebsiteDto } from './dto/create-website.dto'
 import { WebsiteService } from './website.service'
 import { Website } from './website.model'
-import { Roles } from 'nest-keycloak-connect'
 
 @Controller('websites')
 export class WebsiteController {
@@ -14,7 +13,6 @@ export class WebsiteController {
   }
 
   @Get()
-  @Roles({ roles: ['realm:user', 'realm:admin'] })
   async findAll(): Promise<Website[]> {
     return this.websiteService.findAll()
   }

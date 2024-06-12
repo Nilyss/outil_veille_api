@@ -4,6 +4,9 @@
 
 Ce projet est une API construite avec Nest.js. Elle fournit des endpoints pour accéder à diverses ressources de veille, comme YouTube, des sites web, des podcasts, et plus encore. Cette API est conçue pour être exécutée localement pour le développement et les tests pour le moment.
 
+## Swagger
+https://app.swaggerhub.com/apis/NicolasDECRESSAC/outil-veille_api/1.0
+
 ## Endpoints
 
 L'API fournit les endpoints suivants :

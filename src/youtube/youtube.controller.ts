@@ -3,7 +3,6 @@ import { CreateYoutubeDto } from './dto/create-youtube.dto'
 import { YoutubeService } from './youtube.service'
 import { Youtube } from './youtube.model'
 import { youtube_v3 } from 'googleapis'
-import { Roles } from 'nest-keycloak-connect'
 
 @Controller('youtube')
 export class YoutubeController {
@@ -15,13 +14,11 @@ export class YoutubeController {
   }
 
   @Get()
-  @Roles({ roles: ['realm:user', 'realm:admin'] })
   findAll(): Promise<Youtube[]> {
     return this.youtubeService.findAll()
   }
 
   @Get('latest')
-  @Roles({ roles: ['realm:user', 'realm:admin'] })
   getLatestVideos(
     @Query('channelId') channelId: string,
   ): Promise<youtube_v3.Schema$SearchListResponse> {

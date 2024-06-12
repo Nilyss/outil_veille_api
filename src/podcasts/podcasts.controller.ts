@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body } from '@nestjs/common'
 import { CreatePodcastsDto } from './dto/create-podcasts.dto'
 import { PodcastsService } from './podcasts.service'
 import { Podcasts } from './podcasts.model'
-import { Roles } from 'nest-keycloak-connect'
 
 @Controller('podcasts')
 export class PodcastsController {
@@ -16,7 +15,6 @@ export class PodcastsController {
   }
 
   @Get()
-  @Roles({ roles: ['realm:user', 'realm:admin'] })
   async findAll(): Promise<Podcasts[]> {
     return this.podcastsService.findAll()
   }

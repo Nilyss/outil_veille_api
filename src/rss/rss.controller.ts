@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body } from '@nestjs/common'
 import { CreateRssDto } from './dto/create-rss.dto'
 import { RssService } from './rss.service'
 import { Rss } from './rss.model'
-import { Roles } from 'nest-keycloak-connect'
 
 @Controller('rss')
 export class RssController {
@@ -14,7 +13,6 @@ export class RssController {
   }
 
   @Get()
-  @Roles({ roles: ['realm:user', 'realm:admin'] })
   async findAll(): Promise<Rss[]> {
     return this.rssService.findAll()
   }
