@@ -20,8 +20,8 @@ export class UsersService {
     return this.userModel.find().exec()
   }
 
-  async findOne(userName: string): Promise<User | undefined> {
-    return this.userModel.findOne({ userName }).exec()
+  async findOne(email: string): Promise<User | undefined> {
+    return this.userModel.findOne({ email }).exec()
   }
 
   async validatePassword(

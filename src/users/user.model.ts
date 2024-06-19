@@ -9,7 +9,7 @@ export class User {
   @Prop({ type: String, default: () => new mongoose.Types.ObjectId() })
   _id: string
   @Prop()
-  userName: string
+  email: string
   @Prop()
   password: string
 }

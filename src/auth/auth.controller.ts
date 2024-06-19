@@ -24,7 +24,7 @@ export class AuthController {
   @Post('login')
   async signIn(@Body() signInDto: SingInDto, @Response() res: Res) {
     const { access_token } = await this.authService.signIn(
-      signInDto.username,
+      signInDto.email,
       signInDto.password,
     )
     res.cookie('access_token', access_token, {
