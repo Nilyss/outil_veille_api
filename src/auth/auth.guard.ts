@@ -5,10 +5,12 @@ import {
   UnauthorizedException,
 } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
-import { jwtConstants } from './constants'
 import { Request } from 'express'
 import { Reflector } from '@nestjs/core'
 import { IS_PUBLIC_KEY } from '../decorators/public.decorator'
+import { ConfigService } from '@nestjs/config'
+
+const configService = new ConfigService()
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -27,13 +29,13 @@ export class AuthGuard implements CanActivate {
     }
 
     const request = context.switchToHttp().getRequest()
-    const token = this.extractTokenFromHeader(request)
+    const token = this.extractTokenFromCookie(request)
     if (!token) {
-      throw new UnauthorizedException()
+      throw new UnauthorizedException('No token provided')
     }
     try {
       const payload = await this.jwtService.verifyAsync(token, {
-        secret: jwtConstants.secret,
+        secret: configService.get<string>('JWT_SECRET_KEY'),
       })
       request['user'] = payload
     } catch {
@@ -42,8 +44,7 @@ export class AuthGuard implements CanActivate {
     return true
   }
 
-  private extractTokenFromHeader(request: Request): string | undefined {
-    const [type, token] = request.headers.authorization?.split(' ') ?? []
-    return type === 'Bearer' ? token : undefined
+  private extractTokenFromCookie(request: Request): string | undefined {
+    return request.cookies['access_token']
   }
 }
