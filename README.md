@@ -11,6 +11,9 @@ https://app.swaggerhub.com/apis/NicolasDECRESSAC/outil-veille_api/1.0
 
 L'API fournit les endpoints suivants :
 
+- **create user** : `http://localhost:3000/users/create`
+- **login user** : `http://localhost:3000/auth/login`
+- **get users** : `http://localhost:3000/users/`
 - **IA** : `http://localhost:3000/ai`
 - **FAQ** : `http://localhost:3000/faq`
 - **Podcasts** : `http://localhost:3000/podcasts`
