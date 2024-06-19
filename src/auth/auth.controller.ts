@@ -7,10 +7,13 @@ import {
   UseGuards,
   Get,
   Request,
+  Response,
 } from '@nestjs/common'
+import { SingInDto } from './dto/sign-in.dto'
 import { AuthGuard } from './auth.guard'
 import { AuthService } from './auth.service'
 import { Public } from '../decorators/public.decorator'
+import { Response as Res } from 'express'
 
 @Controller('auth')
 export class AuthController {
@@ -19,9 +22,18 @@ export class AuthController {
   @Public()
   @HttpCode(HttpStatus.OK)
   @Post('login')
-  signIn(@Body() signInDto: Record<string, any>) {
-    console.log('Request Body: ', signInDto)
-    return this.authService.signIn(signInDto.userName, signInDto.password)
+  async signIn(@Body() signInDto: SingInDto, @Response() res: Res) {
+    const { access_token } = await this.authService.signIn(
+      signInDto.username,
+      signInDto.password,
+    )
+    res.cookie('access_token', access_token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'strict',
+      maxAge: 3600 * 1000,
+    })
+    res.send({ message: 'Login successfull' })
   }
 
   @UseGuards(AuthGuard)
