@@ -10,10 +10,10 @@ export class AuthService {
   ) {}
 
   async signIn(
-    userName: string,
+    email: string,
     pass: string,
   ): Promise<{ access_token: string }> {
-    const user = await this.userService.findOne(userName)
+    const user = await this.userService.findOne(email)
     if (
       !user ||
       !(await this.userService.validatePassword(pass, user.password))
@@ -21,7 +21,7 @@ export class AuthService {
       console.log('Invalid password')
       throw new UnauthorizedException('Invalid username or password')
     }
-    const payload = { sub: user._id, userName: user.userName }
+    const payload = { sub: user._id, email: user.email }
     const accessToken = await this.jwtService.signAsync(payload)
     console.log('Access Token: ', accessToken)
     return {
