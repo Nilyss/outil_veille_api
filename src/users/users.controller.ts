@@ -1,4 +1,11 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common'
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  ConflictException,
+} from '@nestjs/common'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UsersService } from './users.service'
 import { User } from './user.model'
@@ -11,7 +18,14 @@ export class UsersController {
   @Public()
   @Post('create')
   async create(@Body() createUserDto: CreateUserDto): Promise<User> {
-    return this.usersService.create(createUserDto)
+    try {
+      return this.usersService.create(createUserDto)
+    } catch (error) {
+      if (error instanceof ConflictException) {
+        throw new ConflictException(error.message)
+      }
+      throw error
+    }
   }
 
   @Get()

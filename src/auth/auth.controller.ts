@@ -23,7 +23,7 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @Post('login')
   async signIn(@Body() signInDto: SingInDto, @Response() res: Res) {
-    const { access_token } = await this.authService.signIn(
+    const { user, access_token } = await this.authService.signIn(
       signInDto.email,
       signInDto.password,
     )
@@ -33,12 +33,11 @@ export class AuthController {
       sameSite: 'strict',
       maxAge: 3600 * 1000,
     })
-    res.send({ message: 'Login successfull' })
+    res.json({ user })
   }
-
+  @Get(':id')
   @UseGuards(AuthGuard)
-  @Get('profile')
-  getProfile(@Request() req) {
+  async getProfile(@Request() req) {
     return req.user
   }
 }

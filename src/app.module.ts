@@ -9,8 +9,6 @@ import { WebsiteModule } from './websites/website.module'
 import { YoutubeModule } from './youtube/youtube.module'
 import { UsersModule } from './users/users.module'
 import { AuthModule } from './auth/auth.module'
-import { databaseProviders } from './database/database.providers'
-// import { DatabaseModule } from './database/database.module'
 import { MongooseModule } from '@nestjs/mongoose'
 
 @Module({
@@ -37,8 +35,6 @@ import { MongooseModule } from '@nestjs/mongoose'
     YoutubeModule,
     UsersModule,
     AuthModule,
-    // DatabaseModule,
   ],
-  // providers: [...databaseProviders],
 })
 export class AppModule {}

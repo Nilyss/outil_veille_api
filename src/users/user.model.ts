@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
+import { Exclude } from 'class-transformer'
 import mongoose, { Document } from 'mongoose'
 import * as bcrypt from 'bcrypt'
 
@@ -8,9 +9,12 @@ export type UserDocument = User & Document
 export class User {
   @Prop({ type: String, default: () => new mongoose.Types.ObjectId() })
   _id: string
-  @Prop()
+
+  @Prop({ unique: true })
   email: string
+
   @Prop()
+  @Exclude()
   password: string
 }
 
@@ -22,5 +26,6 @@ UserSchema.pre<UserDocument>('save', async function (next): Promise<void> {
   }
   const salt: string = await bcrypt.genSalt(10)
   this.password = await bcrypt.hash(this.password, salt)
+  console.log('salt', salt)
   next()
 })
